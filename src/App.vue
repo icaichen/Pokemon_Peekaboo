@@ -6,7 +6,7 @@
     :key="`card-${index}`"
     :value="card.value" 
     :visible="card.visible"
-    :positiion="card.position"
+    :position="card.position"
     @select-card="flipCard"
 
     />
@@ -32,7 +32,7 @@
             position: i
           })
     }
-    const flipCard = (payload)=>{
+    const flipCard = payload=>{
       cardList.value[payload.position].visible = true
     }
     return {
