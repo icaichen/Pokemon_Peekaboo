@@ -2,7 +2,7 @@
   <!-- <h1 class="sr-only">pokemon peek a boo</h1> -->
   <img src="/images/title.png" alt="peek a boo" class="title">
   <section class="description">
-    <p>A Card Matching Game with Pokemon</p>
+    <p>A Card Matching Game with Pokemon Made with Vue.js 3</p>
   </section>
   <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card 
@@ -189,9 +189,9 @@ h1 {
   color: white;
   padding-top: 60px;
 }
-/* 
-#app.background-image {
-  object-fit: cover;
+
+/* #app background-image {
+  height: 100%;
 } */
 .game-board {
   display: grid;
@@ -199,6 +199,7 @@ h1 {
   grid-column-gap: 24px;
   grid-template-rows: repeat(4, 120px);
   grid-row-gap: 24px;
+  /* height: 100vh; */
   justify-content: center;
 }
 
