@@ -92,15 +92,17 @@
 
       if (userSelection.value[0]) {
         if (
-          userSelection.value[0].position === payload.position &&
-          userSelection.value[0].faceValue === payload.faceValue
+          (userSelection.value[0].position === 
+          payload.position) && 
+          (userSelection.value[0].faceValue === 
+          payload.faceValue)
         ) {
           return
         } else {
           userSelection.value[1] = payload
         }
       } else {
-          userSelection.value[0].payload
+          userSelection.value[0] = payload
       }
     }
 
@@ -124,7 +126,6 @@
         }
 
         userSelection.value.length = 0
-
         }
       },
       { deep: true} 
