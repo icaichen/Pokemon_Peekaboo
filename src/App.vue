@@ -1,10 +1,10 @@
 <template>
   <!-- <h1 class="sr-only">pokemon peek a boo</h1> -->
   <img src="/images/title.png" alt="peek a boo" class="title">
-  <section class="game-board">
+  <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card 
-    v-for="(card, index) in cardList"
-    :key="`card-${index}`"
+    v-for="card in cardList"
+    :key="`${card.value}-${card.variant}`"
     :value="card.value"
     :matched="card.matched"
     :visible="card.visible"
@@ -12,7 +12,7 @@
     @select-card="flipCard"
 
     />
-  </section>
+  </transition-group>
   <h2>{{ status }}</h2>
   <!-- <button @click="shuffleCards">Shuffle Cards</button> -->
   <button @click="restartGame" class="button"><img
@@ -70,12 +70,14 @@
     cardItems.forEach(item => {
       cardList.value.push({
           value: item,
+          variant: 1,
           visible: false,
           position: null,
           matched: false
         })
       cardList.value.push({
           value: item,
+          variant: 2,
           visible: false,
           position: null,
           matched: false
@@ -124,7 +126,7 @@
           setTimeout(() => {
             cardList.value[cardOne.position].visible = false
             cardList.value[cardTwo.position].visible = false
-          }, 500)
+          }, 1000)
         }
 
         userSelection.value.length = 0
@@ -194,5 +196,9 @@ h1 {
 
 .button img {
   padding-right: 5px;
+}
+
+.shuffle-card-move {
+  transition: transform 0.8s ease-in;
 }
 </style>
