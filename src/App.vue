@@ -22,6 +22,7 @@
 
 <script>
   import _ from 'lodash'
+  import {launchConfetti} from './utilities/confetti'
   import { computed, ref, watch} from 'vue'
   import Card from './components/Card'
   export default {
@@ -109,6 +110,12 @@
           userSelection.value[0] = payload
       }
     }
+
+    watch (remainingPairs, currentValue => {
+      if (currentValue === 0) {
+        launchConfetti()
+      }
+    })
 
     watch (
       userSelection, 
