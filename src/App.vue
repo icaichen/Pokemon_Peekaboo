@@ -1,5 +1,6 @@
 <template>
-  <h1>Peek-a-Vue</h1>
+  <!-- <h1 class="sr-only">pokemon peek a boo</h1> -->
+  <img src="/images/title.png" alt="peek a boo" class="title">
   <section class="game-board">
     <Card 
     v-for="(card, index) in cardList"
@@ -14,7 +15,9 @@
   </section>
   <h2>{{ status }}</h2>
   <!-- <button @click="shuffleCards">Shuffle Cards</button> -->
-  <button @click="restartGame">Restart Game</button>
+  <button @click="restartGame" class="button"><img
+  src="/images/restart.png" alt="Restart Icon"/> Restart Game
+  </button>
 </template>
 
 <script>
@@ -63,7 +66,7 @@
         })
       }
 
-    const cardItems =[1, 2, 3, 4, 5, 6, 7, 8]
+    const cardItems =['Charmander', 'pikapika', 'jienijieni', 'meowth', 'zhongzizhongzi', 'cubone', 'Psyduck', 'Lapras']
 
     cardItems.forEach(item => {
       cardList.value.push({
@@ -143,23 +146,54 @@
 </script>
 
 <style>
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  margin-top: 0;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  background-image: url('/images/background.png');
+  height: 100vh;
+  color: green;
+  padding-top: 60px;
 }
-
-
+/* 
+#app.background-image {
+  object-fit: cover;
+} */
 .game-board {
   display: grid;
-  grid-template-columns: 100px 100px 100px 100px;
-  grid-column-gap: 30px;
-  grid-template-rows: 100px 100px 100px 100px;
-  grid-row-gap: 30px;
+  grid-template-columns: repeat(4, 120px);
+  grid-column-gap: 24px;
+  grid-template-rows: repeat(4, 120px);
+  grid-row-gap: 24px;
   justify-content: center;
 }
 
+.title {
+ padding-bottom: 30px; 
+}
+
+.button {
+  background-color: orange;
+  color: white;
+  padding: 0.75rem 0.5 rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-weight: bold;
+}
+
+.button img {
+  padding-right: 5px;
+}
 </style>
