@@ -19,7 +19,7 @@
 
 <script>
   import _ from 'lodash'
-  import {computed, ref, watch} from 'vue';
+  import { computed, ref, watch} from 'vue'
   import Card from './components/Card'
 
   export default {
@@ -33,7 +33,7 @@
 
       const status = computed(() => {
         if (remainingPairs.value === 0) {
-          return 'Player wins'
+          return 'Player wins!'
         } else {
           return `Remaining Pairs: ${remainingPairs.value}`
         }
@@ -42,8 +42,9 @@
       const remainingPairs = computed(()=> {
         const remainingCards = cardList.value.filter(
           card => card.matched === false).length
-        
+
         return remainingCards / 2
+
       })
 
       const shuffleCards = () => {
@@ -55,7 +56,7 @@
         cardList.value = cardList.value.map((card, index) => {
           return {
             ...card,
-            method: false,
+            matched: false,
             position: index,
             visible: false
           }
@@ -95,8 +96,11 @@
         userSelection.value[0] = payload
       }
     }
-    watch (userSelection, (currentValue)=> {
-      if (currentValue.length ===2) {
+
+    watch (
+      userSelection, 
+      currentValue => {
+      if (currentValue.length === 2) {
         const cardOne = currentValue[0]
         const cardTwo = currentValue[1]
 
@@ -106,15 +110,17 @@
           cardList.value[cardOne.position].matched = true
           cardList.value[cardTwo.position].matched = true
         } else {
-
-          cardList.value[cardOne.position].visible = false
-          cardList.value[cardTwo.position].visible = false
-
+          setTimeout(() => {
+            cardList.value[cardOne.position].visible = false
+            cardList.value[cardTwo.position].visible = false
+          }, 500)
         }
+
         userSelection.value.length = 0
+
         }
       },
-      {deep: true}
+      { deep: true} 
     )
     return {
       cardList,
@@ -122,10 +128,10 @@
       userSelection,
       status,
       shuffleCards,
-      restartGame
+      restartGame    
+      }
     }
-  }
-  }
+  } 
 </script>
 
 <style>

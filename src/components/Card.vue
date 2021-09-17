@@ -18,11 +18,11 @@
                 default: false
             }
         },
-        setup(props,context){
-            const selectCard = ()=> {
-                context.emit('select-card',{
+        setup(props, context){
+            const selectCard = () => {
+                context.emit('select-card', {
                     position: props.position,
-                    alue: props.value
+                    faceValue: props.value
                 })
             }
             return {
@@ -35,7 +35,7 @@
 <template>
     <div class="card" @click="selectCard" >
         <div v-if="visible" class="card-face is-front">
-            {{ value }}-{{ position }}
+            {{ value }} - {{ position }}
         </div>
         <div v-else class="card-face is-back">Back</div>
     </div>
