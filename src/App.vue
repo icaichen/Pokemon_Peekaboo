@@ -1,6 +1,9 @@
 <template>
   <!-- <h1 class="sr-only">pokemon peek a boo</h1> -->
   <img src="/images/title.png" alt="peek a boo" class="title">
+  <section class="description">
+    <p>A Card Matching Game with Pokemon</p>
+  </section>
   <transition-group tag="section" class="game-board" name="shuffle-card">
     <Card 
     v-for="card in cardList"
@@ -13,11 +16,15 @@
 
     />
   </transition-group>
-  <h2>{{ status }}</h2>
+  <h2 class="status">{{ status }}</h2>
   <!-- <button @click="shuffleCards">Shuffle Cards</button> -->
-  <button @click="restartGame" class="button"><img
-  src="/images/restart.png" alt="Restart Icon"/> Restart Game
+  <button v-if="newPlayer" @click="startGame" class="button">
+    <img src="/images/go.png" alt="Start Icon"/> Start Game
   </button>
+  <button v-else @click="restartGame" class="button">
+    <img src="/images/restart.png" alt="Restart Icon"/> Restart Game
+  </button>
+
 </template>
 
 <script>
@@ -33,6 +40,13 @@
     setup() {
       const cardList = ref([])
       const userSelection = ref([])
+      const newPlayer = ref(true)
+      
+      const startGame = () => {
+        newPlayer.value= false
+
+        restartGame()
+      }
 
       const status = computed(() => {
         if (remainingPairs.value === 0) {
@@ -79,7 +93,7 @@
       cardList.value.push({
           value: item,
           variant: 2,
-          visible: false,
+          visible: true,
           position: null,
           matched: false
         })
@@ -147,7 +161,9 @@
       userSelection,
       status,
       shuffleCards,
-      restartGame    
+      restartGame,
+      startGame,
+      newPlayer
       }
     }
   } 
@@ -170,7 +186,7 @@ h1 {
   color: #2c3e50;
   background-image: url('/images/background.png');
   height: 100vh;
-  color: green;
+  color: white;
   padding-top: 60px;
 }
 /* 
@@ -186,19 +202,34 @@ h1 {
   justify-content: center;
 }
 
+.description {
+  font-family: 'Oswald', sans-serif;
+}
+.description p {
+  margin: 0;
+  font-size: 1.2rem;
+  padding-bottom: 30px;
+}
 .title {
- padding-bottom: 30px; 
+ padding-bottom: 20px; 
 }
 
 .button {
   background-color: orange;
   color: white;
-  padding: 0.75rem 0.5 rem;
+  /* padding: 0.75rem 0.5 rem; */
   display: flex;
   align-items: center;
   justify-content: center;
   margin: auto;
   font-weight: bold;
+  font-family: 'Oswald', sans-serif;
+  padding: 0.7rem 0.5rem;
+  border-radius: 10px; 
+}
+
+.status {
+  font-family: 'Oswald', sans-serif;
 }
 
 .button img {
