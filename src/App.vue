@@ -24,7 +24,6 @@
   import _ from 'lodash'
   import { computed, ref, watch} from 'vue'
   import Card from './components/Card'
-
   export default {
     name: 'App',
     components: {
